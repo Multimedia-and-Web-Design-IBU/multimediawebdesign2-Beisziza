@@ -20,7 +20,8 @@
       <figcaption>Beis Ziza's profile photo</figcaption>
     </figure>
 
-    <h1>Beis Ziza</h1>
+    <!-- Changed h1 to have id="title" for JS -->
+    <h1 id="title">Beis Ziza</h1>
 
     <nav aria-label="Primary navigation">
       <a href="#about">About Me</a> |
@@ -113,14 +114,6 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
       </iframe>
-
-      <!-- Optionally add a local video (commented out example) -->
-      <!--
-      <video controls poster="https://via.placeholder.com/560x315?text=Video+Poster" width="560">
-        <source src="sample-video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      -->
     </section>
 
     <section id="contact">
@@ -152,9 +145,16 @@
           <textarea id="message" name="message" rows="5"></textarea>
         </div>
         <div>
-          <button type="submit" aria-label="Submit contact form">Submit</button>
+          <button id="btn" type="button" aria-label="Submit contact form">Click me</button>
         </div>
       </form>
+
+      <div>
+        <p id="output"></p>
+        <ul id="list"></ul>
+      </div>
+
+      <input id="search" type="text" placeholder="Type here..." aria-label="Search input">
 
       <div>
         <p>Find me here:</p>
@@ -170,7 +170,7 @@
           title="Google Map location of Skopje">
         </iframe>
       </div>
-      
+
       <p>Links:</p>
       <p>
         <a href="https://beisziza.com" target="_blank" rel="noopener" aria-label="Visit Beis Ziza's website">Personal Website</a> | 
