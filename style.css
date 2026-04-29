@@ -1,5 +1,7 @@
 /* === RESET === */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -7,259 +9,436 @@
 
 /* === VARIABLES === */
 :root {
-  --color-primary: #1E3A5F;
-  --color-secondary: #3A6EA5;
-  --color-accent: #F28C28;
+  --color-primary: #1e3a5f;
+  --color-secondary: #3a6ea5;
+  --color-accent: #f28c28;
   --color-text: #333;
-  --color-bg: #F0F4F8;
+  --color-bg: #f0f4f8;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
+
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+
   --nav-height: 80px;
+
+  --font-heading: 'Georgia', serif;
+  --font-body: Arial, sans-serif;
 }
 
 /* === BASE === */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-bg);
-  margin: 0;
-  font-family: Arial, sans-serif;
-  font-size: 1rem; /* 16px */
-  line-height: 1.7;
+  font-family: var(--font-body);
   color: var(--color-text);
-  padding-top: calc(var(--nav-height) + 20px);
+  line-height: 1.7;
+  padding-top: calc(var(--nav-height) + var(--space-md));
 }
 
 h1 {
   color: var(--color-primary);
-  text-align: center;
+  font-family: var(--font-heading);
   font-size: clamp(1.8rem, 5vw, 3.5rem);
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-  font-family: 'Georgia', serif; /* Change to your heading font if desired */
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: var(--space-lg);
 }
 
-h2 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  letter-spacing: 2px;
+h2.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   text-transform: uppercase;
-  font-family: 'Arial Black', Gadget, sans-serif; /* Change to your heading font */
+  letter-spacing: 2px;
+  color: var(--color-primary);
+  padding-bottom: var(--space-sm);
+  border-bottom: 3px solid var(--color-accent);
+  margin-bottom: var(--space-md);
+  cursor: default;
 }
 
 p {
   font-size: 1rem;
-  line-height: 1.6;
+  margin-bottom: var(--space-md);
 }
 
-/* === LAYOUT === */
-.container {
-  max-width: 1100px;
-  width: 90%;
-  margin: 0 auto;
-}
-
+/* === HEADER === */
 header {
   background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-  padding: 20px 0;
   color: white;
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
+  z-index: 100;
   height: var(--nav-height);
+  padding: var(--space-md);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  z-index: 1000;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+nav {
+  text-align: center;
 }
 
 nav a {
   color: white;
   text-decoration: none;
   margin: 0 10px;
-  position: relative;
   font-weight: bold;
   font-size: 1rem;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-nav a:hover, nav a:focus {
+nav a:hover,
+nav a:focus {
   color: var(--color-accent);
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
 
 nav a::after {
   content: '';
-  display: block;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
   width: 0;
   height: 2px;
-  background: var(--color-accent);
-  transition: width 0.3s;
-  position: absolute;
-  bottom: -4px;
-  left: 0;
+  background-color: var(--color-accent);
+  transition: width 0.3s ease;
 }
 
-nav a:hover::after, nav a:focus::after {
+nav a:hover::after,
+nav a:focus::after {
   width: 100%;
 }
 
-footer {
-  background-color: var(--color-primary);
-  color: white;
-  text-align: center;
-  padding: 15px 0;
-  margin-top: 40px;
+/* === SKILLS SECTION FLEX === */
+.skills-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
 }
 
-section:nth-child(even) {
-  background-color: rgba(58, 110, 165, 0.1); /* semi-transparent secondary color */
-  padding: 20px 0;
-}
-
-section:nth-child(odd) {
+.skills-flex li {
+  flex: 1 1 150px;
+  padding: var(--space-md);
+  border-radius: 6px;
   background-color: white;
-  padding: 20px 0;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* === TYPOGRAPHY === */
-.section-title {
-  text-transform: uppercase;
-  border-bottom: 3px solid var(--color-accent);
-  padding-bottom: 8px;
-  margin-bottom: 15px;
-  color: var(--color-primary);
-  letter-spacing: 2px;
+.skills-flex li:hover {
+  background-color: var(--color-accent);
+  color: white;
+  transform: scale(1.05);
 }
 
-a {
-  color: var(--color-primary);
+/* === ABOUT SECTION FLEX === */
+.about-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: var(--space-xl);
+}
+
+.about-content img {
+  flex: 0 0 200px;
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+  filter: grayscale(80%);
+  transition: filter 0.4s ease;
+}
+
+.about-content img:hover {
+  filter: grayscale(0%);
+}
+
+/* === CONTAINER === */
+.container {
+  max-width: 1100px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* === PROJECTS GRID === */
+.projects-grid {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  margin-bottom: var(--space-xl);
+}
+
+.project-card {
+  background: white;
+  border-radius: 10px;
+  padding: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.project-card span.new-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--color-accent);
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+/* === HERO SECTION === */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  padding: var(--space-xl);
+  overflow: hidden;
+}
+
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* === BACK TO TOP BUTTON === */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 44px;
+  cursor: pointer;
   text-decoration: none;
+  box-shadow: var(--shadow-md);
+  transition: background-color 0.3s ease;
+  z-index: 1000;
 }
 
-a:hover, a:focus {
-  text-decoration: underline;
-  color: var(--color-accent);
+.back-to-top:hover,
+.back-to-top:focus {
+  background-color: var(--color-primary);
+  outline: none;
 }
 
-/* Attribute selectors */
-input[type='text'], input[type='email'] {
-  border: 1px solid #ccc;
-  padding: 8px;
-  border-radius: 4px;
-  width: 100%;
-  max-width: 400px;
-  font-size: 1rem;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
+/* === ANIMATIONS === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
-/* Contact form textarea */
+#hero h1 {
+  animation: fadeIn 1s ease forwards;
+}
+
+#hero p {
+  animation: fadeIn 1s ease 0.3s forwards;
+}
+
+#hero button {
+  animation: fadeIn 1s ease 0.6s forwards;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+}
+
+.hire-me {
+  animation: pulse 2s infinite;
+}
+
+/* === TABLET - MEDIA QUERY === */
+@media (min-width: 768px) {
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+  }
+
+  nav a {
+    margin: 0;
+  }
+
+  .about-content {
+    flex-direction: row;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #about p {
+    column-count: 2;
+    column-gap: 40px;
+    column-rule: 1px solid #e0e0e0;
+  }
+
+  #about h2.section-title {
+    column-span: all;
+  }
+}
+
+/* === DESKTOP - MEDIA QUERY === */
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .container {
+    max-width: 1100px;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  h2.section-title {
+    font-size: 2rem;
+  }
+}
+
+/* === ADDITIONAL STYLES === */
 textarea {
+  resize: vertical;
   font-family: inherit;
   font-size: 1rem;
   width: 100%;
   max-width: 600px;
-  padding: 8px;
+  padding: var(--space-md);
   border-radius: 4px;
   border: 1px solid #ccc;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  resize: vertical;
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-lg);
   box-sizing: border-box;
 }
 
-/* Buttons */
+input[type='text'],
+input[type='email'],
+input[list] {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-sm);
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  box-sizing: border-box;
+}
+
 button {
+  cursor: pointer;
   background-color: var(--color-primary);
   color: white;
   border: none;
   padding: 12px 25px;
-  border-radius: 5px;
+  border-radius: 6px;
   font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-button:hover, button:focus {
+button:hover {
   background-color: var(--color-accent);
-  outline: none;
+  transform: translateY(-2px);
 }
 
-/* Skip link */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--color-primary);
-  color: white;
-  padding: 8px;
-  z-index: 100;
-  transition: top 0.3s;
+button:active {
+  transform: translateY(0);
 }
 
-.skip-link:focus {
-  top: 0;
+/* === SCROLLBAR === */
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-/* Add CSS counters for skills */
-#skills ul {
-  list-style: none;
-  counter-reset: skill-counter; /* reset counter */
-  padding-left: 0;
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
 }
 
-#skills ul li {
-  counter-increment: skill-counter;
-  position: relative;
-  padding-left: 30px;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: var(--color-accent);
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 10px;
+  border: 3px solid var(--color-bg);
 }
 
-#skills ul li::before {
-  content: counter(skill-counter) ".";
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-weight: bold;
-  color: var(--color-primary);
+/* === FOCUS VISIBLE === */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
-/* Projects section: add counters for project rows */
-#projects tbody tr {
-  counter-increment: project-counter;
-}
+/* === DARK MODE === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #121212;
+    --color-text: #e0e0e0;
+    --color-primary: #bb86fc;
+    --color-secondary: #3700b3;
+    --color-accent: #03dac6;
+  }
 
-#projects tbody tr td:first-child::before {
-  content: "Project " counter(project-counter) ": ";
-  font-weight: bold;
-  color: var(--color-accent);
-}
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
 
-/* Utility classes */
-.text-center {
-  text-align: center !important;
-}
+  header {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  }
 
-/* Responsive typography */
-h2 {
-  font-size: clamp(1.2rem, 3vw, 2rem);
-}
+  footer {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+  }
 
-p {
-  font-size: clamp(0.9rem, 2vw, 1rem);
-}
+  nav a {
+    color: var(--color-text);
+  }
 
-/* Image max width for responsiveness */
-img {
-  max-width: min(150px, 100%);
-  height: auto;
-}
-
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
-    animation-duration: 0 !important;
-    animation-delay: 0 !important;
-    animation-iteration-count: 1 !important;
+  nav a:hover,
+  nav a:focus {
+    color: var(--color-accent);
   }
 }
