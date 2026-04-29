@@ -2,45 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Beis Ziza</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio site of Beis Ziza, a motivated learner and web design enthusiast." />
+  <meta name="author" content="Beis Ziza" />
+  <title>Beis Ziza | Web Developer Portfolio</title>
 </head>
 <body>
 
-  <a href="https://beisziza.com">
-    <img src="https://via.placeholder.com/150" alt="Profile photo" width="150" />
-  </a>
+  <header>
+    <a href="https://beisziza.com">
+      <img src="https://via.placeholder.com/150" alt="Profile photo" width="150" />
+    </a>
 
-  <h1>Beis Ziza</h1>
+    <h1>Beis Ziza</h1>
 
-  <h2>About Me</h2>
-  <p>
-    I am a <strong>motivated</strong> learner interested in web design. I love <em>coding</em> and building creative projects.
-  </p>
-  <hr />
+    <nav>
+      <a href="#about">About Me</a> |
+      <a href="#skills">My Skills</a> |
+      <a href="#projects">My Projects</a> |
+      <a href="#contact">Contact Me</a>
+    </nav>
+  </header>
 
-  <h2>My Skills</h2>
-  <ul>
-    <li>HTML</li>
-    <li>CSS</li>
-    <li>JavaScript</li>
-    <li>Python</li>
-  </ul>
+  <main>
 
-  <h2>How I Learn HTML</h2>
-  <ol>
-    <li>Read the lesson</li>
-    <li>Practice with exercises</li>
-    <li>Experiment with code</li>
-    <li>Ask questions</li>
-    <li>Build projects</li>
-  </ol>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        I am a <strong>motivated</strong> learner interested in web design. I love <em>coding</em> and building creative projects.
+      </p>
+      <hr />
+    </section>
 
-  <h2>Connect With Me</h2>
-  <p>
-    <a href="https://beisziza.com">My Website</a><br />
-    <a href="https://www.wikipedia.org" target="_blank">Wikipedia (opens new tab)</a><br />
-    <a href="mailto:ziza.beis@ibu.edu.mk">Email Me</a>
-  </p>
+    <section id="skills">
+      <h2>My Skills</h2>
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+      </ul>
+    </section>
+
+    <!-- Week 3 Exercise 1: Projects Table -->
+    <section id="projects">
+      <h2>My Projects</h2>
+
+      <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+          <tr>
+            <th colspan="3" style="text-align:center;">Portfolio Projects</th>
+          </tr>
+          <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Portfolio Website</td>
+            <td>A personal website showcasing my projects and skills.</td>
+            <td>Completed</td>
+          </tr>
+          <tr>
+            <td>JavaScript Game</td>
+            <td>A browser-based card game built with JavaScript.</td>
+            <td>In Progress</td>
+          </tr>
+          <tr>
+            <td>Blog Platform</td>
+            <td>A full-stack blog platform using Python and Flask.</td>
+            <td>Planned</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form>
+        <div>
+          <label for="fullname">Full Name (required):</label><br />
+          <input type="text" id="fullname" name="fullname" required />
+        </div>
+        <div>
+          <label for="email">Email (required):</label><br />
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div>
+          <label for="subject">Subject:</label><br />
+          <input type="text" id="subject" name="subject" />
+        </div>
+        <div>
+          <label for="source">How did you find me?</label><br />
+          <select id="source" name="source">
+            <option value="google">Google</option>
+            <option value="socialmedia">Social Media</option>
+            <option value="friend">Friend</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Message:</label><br />
+          <textarea id="message" name="message" rows="5"></textarea>
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <hr />
+    <p>&copy; 2024 Beis Ziza</p>
+  </footer>
 
 </body>
 </html>
