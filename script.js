@@ -1,4 +1,4 @@
-// ===== Block 1: Arrays =====
+// ===== Week 1: Arrays =====
 
 // Exercise 1.1
 const fruits = ["apple", "banana", "cherry", "date"];
@@ -12,14 +12,14 @@ console.log(fruits[fruits.length - 1]); // date
 // Exercise 1.2
 const scores = [85, 92, 78];
 scores.push(95);
-console.log(scores); // [85, 92, 78, 95]
+console.log(scores);
 const removed = scores.pop();
-console.log(removed); // 95
-console.log(scores); // [85, 92, 78]
+console.log(removed);
+console.log(scores);
 scores.unshift(70);
-console.log(scores); // [70, 85, 92, 78]
+console.log(scores);
 scores.shift();
-console.log(scores); // [85, 92, 78]
+console.log(scores);
 
 // Exercise 1.3
 const numbers = [1,2,3,4,5,6,7,8];
@@ -35,25 +35,19 @@ console.log(result);
 // Solo Exercise 1.4 — Student grade analyser
 const allScores = [42, 78, 55, 91, 63, 88, 34, 70, 95, 60];
 console.log('Total number of scores:', allScores.length);
-
 const passing = allScores.filter(score => score >= 70);
 console.log('Passing scores:', passing);
-
 const failing = allScores.filter(score => score < 70);
 console.log('Failing scores:', failing);
-
 const scaled = allScores.map(score => Math.round(score * 1.05));
 console.log('Scaled scores:', scaled);
-
 const firstAbove90 = allScores.find(score => score > 90);
 console.log('First score above 90:', firstAbove90);
-
-// BONUS: calculate average
 const sum = allScores.reduce((acc, curr) => acc + curr, 0);
 const avg = sum / allScores.length;
 console.log('Class average:', avg.toFixed(2));
 
-// ===== Block 2: Objects =====
+// ===== Week 2: Objects =====
 
 // Exercise 2.1
 const student = {
@@ -118,41 +112,36 @@ library.push({title: "Fahrenheit 451", author: "Ray Bradbury", year: 1953, avail
 console.log('Added new book:', library);
 const foundBook = library.find(book => book.title === "1984");
 console.log('Found book:', foundBook);
-
-// Add summary method to a book
 library[0].summary = function() {
   return `<span class="math-placeholder" data-math-id="MATHINLINE2"></span>{this.author}, published in ${this.year}.`;
 };
 console.log(library[0].summary());
 
-// ===== Block 3: DOM Manipulation =====
+// ===== Week 3: DOM Manipulation =====
 
-// Selecting elements
-const title = document.getElementById("title");
-console.log(title);
-console.log(title.textContent);
+const titleEl = document.getElementById("title");
+console.log(titleEl);
+console.log(titleEl.textContent);
 
-const btn = document.querySelector("#btn");
+const btn = document.getElementById("btn");
 const firstLi = document.querySelector("li");
 const allParagraphs = document.querySelectorAll("p");
 
-// Changing content and styles
-title.textContent = "Welcome to JavaScript!";
-title.style.color = "blue";
-title.style.fontSize = "2rem";
-title.classList.add("highlight");
-title.classList.remove("highlight");
-title.classList.toggle("active");
-const link = document.querySelector("a");
-if (link) link.setAttribute("href", "https://example.com");
+// Change content & styles
+titleEl.textContent = "Welcome to JavaScript!";
+titleEl.style.color = "blue";
+titleEl.style.fontSize = "2rem";
+titleEl.classList.add("highlight");
+titleEl.classList.remove("highlight");
+titleEl.classList.toggle("active");
 
-// Creating and inserting new elements
+// Create and insert new elements (fruit list)
 const fruitList = ["Apple", "Banana", "Cherry"];
-const list = document.getElementById("list");
+const listEl = document.getElementById("list");
 fruitList.forEach(fruit => {
   const item = document.createElement("li");
   item.textContent = fruit;
-  list.appendChild(item);
+  listEl.appendChild(item);
 });
 const output = document.getElementById("output");
 output.innerHTML = "<strong>List built!</strong> 3 items added.";
@@ -163,50 +152,42 @@ const productsList = [
   { name: "Mouse",  price: 29  },
   { name: "Keyboard", price: 79 }
 ];
-const prodListElement = document.getElementById("list");
-prodListElement.innerHTML = "";
+listEl.innerHTML = "";
 productsList.forEach(product => {
   const item = document.createElement("li");
   item.textContent = `<span class="math-placeholder" data-math-id="MATHINLINE3"></span>${product.price}`;
-  if(product.price > 500) {
-    item.style.color = "red";
-  }
-  prodListElement.appendChild(item);
+  if(product.price > 500) item.style.color = "red";
+  listEl.appendChild(item);
 });
-document.getElementById("title").textContent = "Product Catalogue";
+titleEl.textContent = "Product Catalogue";
 
-// ===== Block 4: Events =====
-const button = document.getElementById("btn");
-const outputEl = document.getElementById("output");
+// ===== Week 4: Events =====
 let clickCount = 0;
-button.addEventListener("click", () => {
+btn.addEventListener("click", () => {
   clickCount++;
-  outputEl.textContent = `Button clicked ${clickCount} time(s).`;
-  button.style.backgroundColor = "green";
-  button.textContent = "Clicked!";
+  output.textContent = `Button clicked ${clickCount} time(s).`;
+  btn.style.backgroundColor = "green";
+  btn.textContent = "Clicked!";
 });
 
-// Keyboard events
 const searchInput = document.getElementById("search");
-if (searchInput) {
-  searchInput.addEventListener("input", (event) => {
-    const typed = event.target.value;
-    outputEl.textContent = `You typed: "<span class="math-placeholder" data-math-id="MATHINLINE4"></span>{typed.length} chars)`;
+if(searchInput) {
+  searchInput.addEventListener("input", e => {
+    output.textContent = `You typed: "<span class="math-placeholder" data-math-id="MATHINLINE4"></span>{e.target.value.length} chars)`;
   });
-  searchInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      outputEl.textContent = `Searched for: "${searchInput.value}"`;
+  searchInput.addEventListener("keydown", e => {
+    if(e.key === "Enter") {
+      output.textContent = `Searched for: "${searchInput.value}"`;
       searchInput.value = "";
     }
   });
 }
 
-// Event delegation
-const listEl = document.getElementById("list");
-listEl.addEventListener("click", (event) => {
-  if(event.target.tagName === "LI") {
-    event.target.style.textDecoration = "line-through";
-    event.target.style.color = "grey";
+// Event delegation on list
+listEl.addEventListener("click", e => {
+  if(e.target.tagName === "LI") {
+    e.target.style.textDecoration = "line-through";
+    e.target.style.color = "grey";
   }
 });
 
@@ -236,82 +217,194 @@ addBtn.addEventListener("click", () => {
   }
 });
 
-taskInput.addEventListener("keydown", (e) => {
-  if(e.key === "Enter") {
-    addBtn.click();
-  }
+taskInput.addEventListener("keydown", e => {
+  if(e.key === "Enter") addBtn.click();
 });
 
-tasksUL.addEventListener("click", (e) => {
+tasksUL.addEventListener("click", e => {
   if(e.target.tagName === "LI") {
     e.target.style.textDecoration = "line-through";
     e.target.style.color = "grey";
   }
 });
 
-// ===== Block 5: Fetch API =====
-
-// Exercise 5.1
+// ===== Week 5: Fetch API =====
 fetch("https://jsonplaceholder.typicode.com/todos/1")
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error("Something went wrong:", error);
-  });
+  .then(resp => resp.json())
+  .then(data => console.log(data))
+  .catch(err => console.error("Fetch error:", err));
 
-// Exercise 5.2
-async function loadUser(id){
+async function loadUser(id) {
   try {
     const resp = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
     const user = await resp.json();
-    console.log(user.name);
-    console.log(user.email);
-    console.log(user.address.city);
+    console.log(user.name, user.email, user.address.city);
   } catch(err) {
     console.error("Failed to load user:", err);
   }
 }
 loadUser(1);
 
-// Exercise 5.3
-async function loadPosts(){
-  const list = document.getElementById("list");
-  list.innerHTML = "<li>Loading...</li>";
+async function loadPosts() {
+  listEl.innerHTML = "<li>Loading...</li>";
   try {
     const resp = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=5");
     const posts = await resp.json();
-    list.innerHTML = "";
+    listEl.innerHTML = "";
     posts.forEach(post => {
       const li = document.createElement("li");
       li.textContent = post.title;
-      list.appendChild(li);
+      listEl.appendChild(li);
     });
-    document.getElementById("title").textContent = `Loaded ${posts.length} posts`;
+    titleEl.textContent = `Loaded ${posts.length} posts`;
   } catch(err) {
-    list.innerHTML = "<li>Error loading posts.</li>";
+    listEl.innerHTML = "<li>Error loading posts.</li>";
   }
 }
 loadPosts();
 
-// Solo Exercise 5.4 — User card generator
-async function showUsers(){
-  const list = document.getElementById("list");
-  const titleEl = document.getElementById("title");
+async function showUsers() {
   try {
     const resp = await fetch("https://jsonplaceholder.typicode.com/users");
     const users = await resp.json();
-    list.innerHTML = "";
+    listEl.innerHTML = "";
     users.forEach(user => {
       const li = document.createElement("li");
       li.textContent = `<span class="math-placeholder" data-math-id="MATHINLINE5"></span>{user.email}`;
-      list.appendChild(li);
+      listEl.appendChild(li);
     });
     titleEl.textContent = `${users.length} Users Loaded`;
   } catch(err) {
-    list.innerHTML = "<li>Error loading users.</li>";
+    listEl.innerHTML = "<li>Error loading users.</li>";
   }
 }
-const loadBtn = document.getElementById("btn");
-if(loadBtn) loadBtn.addEventListener("click", showUsers);
+btn.addEventListener("click", showUsers);
+
+// ===== Week 6 and beyond: various style & animation likely handled in CSS =====
+
+// ===== Week 7.5 Solo Exercise — Photo Gallery =====
+async function loadPhotos(albumId) {
+  listEl.innerHTML = "";
+  output.innerHTML = "";
+  try {
+    const resp = await fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`);
+    if (!resp.ok) throw new Error(`Fail to load photos: ${resp.status}`);
+    const photos = await resp.json();
+    photos.forEach(photo => {
+      const li = document.createElement("li");
+      li.textContent = photo.title;
+      li.dataset.url = photo.thumbnailUrl;
+      listEl.appendChild(li);
+    });
+    titleEl.textContent = `Album <span class="math-placeholder" data-math-id="MATHINLINE6"></span>{photos.length} Photos`;
+  } catch(err) {
+    listEl.innerHTML = `<li>Error: ${err.message}</li>`;
+    titleEl.textContent = "Error loading photos";
+  }
+}
+
+listEl.addEventListener("click", e => {
+  if(e.target.tagName === "LI" && e.target.dataset.url) {
+    output.innerHTML = "";
+    const img = document.createElement("img");
+    img.src = e.target.dataset.url;
+    img.alt = e.target.textContent;
+    output.appendChild(img);
+  }
+});
+
+// ===== Week 8.5 Solo Exercise — Explore API (REST Countries) =====
+async function exploreAPI() {
+  try {
+    const url = new URL("https://restcountries.com/v3.1/region/europe");
+    url.searchParams.set("fields", "name,capital,population");
+    console.log("Fetching URL:", url.toString());
+    const resp = await fetch(url);
+    console.log("Status:", resp.status);
+    console.log("Content-Type:", resp.headers.get("content-type"));
+    if(!resp.ok) throw new Error(`API request failed: ${resp.status}`);
+    const countries = await resp.json();
+    console.log(`Total countries returned: ${countries.length}`);
+    const filtered = countries.filter(c => c.population > 5000000);
+    const names = filtered.map(c => c.name.common).sort();
+    listEl.innerHTML = "";
+    names.forEach(name => {
+      const li = document.createElement("li");
+      li.textContent = name;
+      listEl.appendChild(li);
+    });
+  } catch(err) {
+    listEl.innerHTML = `<li>Error: ${err.message}</li>`;
+  }
+}
+// Optionally call exploreAPI on page load or via button.
+
+
+// ===== Week 9: Solo Exercise loadComments =====
+async function loadComments(postId) {
+  try {
+    updateTitle(`Loading comments for post ${postId}...`);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
+    if(!response.ok) throw new Error(`Failed to load comments: ${response.status}`);
+    const comments = await response.json();
+    clearList();
+    comments.forEach(comment => {
+      const li = document.createElement("li");
+      li.textContent = `<span class="math-placeholder" data-math-id="MATHINLINE7"></span>{comment.email}`;
+      listEl.appendChild(li);
+    });
+    updateTitle(`${comments.length} comments loaded`);
+  } catch (error) {
+    clearList();
+    const li = document.createElement("li");
+    li.textContent = `Error: ${error.message}`;
+    listEl.appendChild(li);
+    updateTitle("Error loading comments");
+  }
+}
+function clearList() {
+  if(listEl) listEl.innerHTML = "";
+}
+function updateTitle(text) {
+  if(titleEl) titleEl.textContent = text;
+}
+// Call loadComments(1) on page load
+loadComments(1);
+
+// Bonus buttons for posts 1, 2, 3
+const btnContainer = document.createElement("div");
+[1,2,3].forEach(id => {
+  const button = document.createElement("button");
+  button.textContent = `Post ${id}`;
+  button.addEventListener("click", () => loadComments(id));
+  btnContainer.appendChild(button);
+});
+document.body.insertBefore(btnContainer, listEl);
+
+// ===== Week 9.5 Solo Exercise Vanilla to React explanation - as comments =====
+/*
+1. State: 'items' array stores the state.
+2. Re-render: 'renderList()' rebuilds DOM to reflect state.
+3. Component: 'renderList()' acts like component rendering UI.
+4. Props: 'text' passed to addItem() is analogous to props.
+
+Bonus React component (requires React setup):
+import React, { useState } from 'react';
+
+function ItemList() {
+  const [items, setItems] = useState([]);
+
+  function addItem(text) {
+    setItems(prev => [...prev, text]);
+  }
+
+  return (
+    <>
+      <button onClick={() => addItem("New Item")}>Add Item</button>
+      <ul>
+        {items.map((item, i) => <li key={i}>{item}</li>)}
+      </ul>
+    </>
+  );
+}
+*/
